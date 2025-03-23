@@ -33,6 +33,12 @@ check_fedora_updates() {
   echo "$result"
 }
 
+check_OpenMandriva_updates() {
+  result=$(dnf check-update -q | grep -v '^Loaded plugins' | grep -v '^No match for' | wc -l)
+  echo "$result"
+}
+
+
 case "$1" in
 -arch)
     check_arch_updates "$2"
@@ -41,6 +47,11 @@ case "$1" in
     check_ubuntu_updates
     ;;
 -fedora)
+    check_fedora_updates
+    ;;
+*)
+
+-OpenMandriva)
     check_fedora_updates
     ;;
 *)
